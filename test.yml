@@ -5,20 +5,25 @@
       debug:
         msg: "Hello World2!"
     - name: Create a JIRA issue
-      ansible.builtin.uri:
+      uri:
         url: https://jsonplaceholder.typicode.com/posts
         # user: your_username
         # password: your_pass
-        method: GET
+        method: POST
         body_format: json
         body: 
           title: "automated"
           body: "bar"
           userId: 1
         # force_basic_auth: yes
-        status_code: 200
+        status_code: 201
       register: cyberark_auth
     - debug:
               var: cyberark_auth
     - debug:
-              var: ansible_connection
+              var: api_token
+    - name: set api_token
+      set_fact: 
+        api_token: "{{ cyberark_auth.json.title }}"
+    - debug:
+              var: api_token
