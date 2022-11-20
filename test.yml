@@ -19,4 +19,4 @@
         status_code: 201
       register: cyberark_auth
     - debug:
-              var: cyberark_auth.content
+              var: cyberark_auth
