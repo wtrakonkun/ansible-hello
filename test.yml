@@ -9,7 +9,7 @@
         url: https://jsonplaceholder.typicode.com/posts
         # user: your_username
         # password: your_pass
-        method: POST
+        method: GET
         body_format: json
         body: 
           title: "automated"
