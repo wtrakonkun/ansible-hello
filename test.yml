@@ -20,3 +20,5 @@
       register: cyberark_auth
     - debug:
               var: cyberark_auth
+    - debug:
+              var: ansible_connection
