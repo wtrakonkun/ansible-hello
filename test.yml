@@ -45,7 +45,7 @@
       # Community AWS Plugin
       # loop: "{{ ec2_instances_info.instances | default([]) | json_query('[].network_interfaces[0].private_ip_address') }}"
       # Amazon AWS Plugin
-      loop: "{{ list_server.results | default([]) | json_query('[].tagged_instances[].stdout') }}"
+      loop: "{{ list_server.results }}"
       loop_control:
         index_var: idx
     - debug:
