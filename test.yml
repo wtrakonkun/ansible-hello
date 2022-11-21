@@ -41,11 +41,11 @@
     - debug:
               var: list_server
     - name: Transform instances password to dict for easy access
-      set_fact: "ec2_instances_passwd_dict={{ ec2_instances_passwd_dict | default({}) | combine({item: list_server['results'][idx].stdout_lines}) }}"
+      set_fact: "ec2_instances_passwd_dict={{ ec2_instances_passwd_dict | default({}) | combine({item: list_server['results'][idx].stdout}) }}"
       # Community AWS Plugin
       # loop: "{{ ec2_instances_info.instances | default([]) | json_query('[].network_interfaces[0].private_ip_address') }}"
       # Amazon AWS Plugin
-      loop: "{{ ec2_instances.results | default([]) | json_query('[].tagged_instances[].private_ip') }}"
+      loop: "{{ list_server.results | default([]) | json_query('[].tagged_instances[].stdout') }}"
       loop_control:
         index_var: idx
     - debug:
