@@ -2,10 +2,9 @@
   hosts: all
   tasks:
     - debug:
+              var: hostvars[inventory_hostname]
+    - debug:
               var: hostvars[inventory_hostname].groups.all
-
-    # - name: Call API
-    #   include_tasks: import_task_test.yml
-    #   loop: 
-    #     - test
-    #     - test2
+    - name: Call API
+      include_tasks: import_task_test.yml
+      loop: hostvars[inventory_hostname].groups.all
