@@ -2,7 +2,7 @@
   hosts: all
   tasks:
     - name: Call API
-      import_tasks: import_task_test.yml
+      include_tasks: import_task_test.yml
       loop: 
         - test
         - test2
