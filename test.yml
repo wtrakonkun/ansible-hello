@@ -7,4 +7,4 @@
               var: hostvars[inventory_hostname].groups.all
     - name: Call API
       include_tasks: import_task_test.yml
-      loop: hostvars[inventory_hostname].groups.all
+      loop: "{{ hostvars[inventory_hostname].groups.all }}"
