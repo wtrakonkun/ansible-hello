@@ -1,52 +1,8 @@
 - name: Hello World Sample
   hosts: all
   tasks:
-    - name: Hello Message
-      debug:
-        msg: "Hello World2!"
-    - name: Create a JIRA issue
-      uri:
-        url: https://jsonplaceholder.typicode.com/posts
-        # user: your_username
-        # password: your_pass
-        method: POST
-        body_format: json
-        body: 
-          title: "automated"
-          body: "bar"
-          userId: 1
-        # force_basic_auth: yes
-        status_code: 201
-      register: cyberark_auth
-    - debug:
-              var: cyberark_auth
-    - debug:
-              var: api_token
-    - name: set api_token
-      set_fact: 
-        api_token: "{{ cyberark_auth.json.title }}"
-    - debug:
-              var: api_token
-    - name: Get password from instances
-      #TODO: Path of keyapir
-      shell: "echo {{ item }}"
-      # environment: "{{ aws_environment }}"
-      # Community AWS Plugin
-      # loop: "{{ ec2_instances_info.instances | default([]) | json_query('[].instance_id') }}"
-      # Amazon AWS Plugin
-      loop:
-        - testuser1
-        - testuser2
-      register: list_server
-    - debug:
-              var: list_server
-    - name: Transform instances password to dict for easy access
-      set_fact: "ec2_instances_passwd_dict={{ ec2_instances_passwd_dict | default({}) | combine({item: list_server['results'][idx].stdout}) }}"
-      # Community AWS Plugin
-      # loop: "{{ ec2_instances_info.instances | default([]) | json_query('[].network_interfaces[0].private_ip_address') }}"
-      # Amazon AWS Plugin
-      loop: "{{ list_server.results }}"
-      loop_control:
-        index_var: idx
-    - debug:
-              var: ec2_instances_passwd_dict
+    - name: Call API
+      import_tasks: import_task_test.yml
+      loop: 
+        - test
+        - test2
