@@ -2,7 +2,7 @@
   hosts: all
   tasks:
     - debug:
-              var: hostvars[inventory_hostname]
+              var: hostvars[inventory_hostname].groups.all
 
     # - name: Call API
     #   include_tasks: import_task_test.yml
